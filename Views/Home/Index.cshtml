@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<button id="myDiv">Sum</button>
+
+<input id ="val1" type="text" class="form-control" aria-label="First Value" aria-describedby="inputGroup-sizing-sm">
+<input id="val2" type="text" class="form-control" aria-label="Second Value" aria-describedby="inputGroup-sizing-sm">
+
+<div id="result"></div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $('#myDiv').click(function () {
+        val1 = $("#val1").val();
+        val2 = $("#val2").val();
+
+        @*$.ajax({
+            type: "POST",
+            url: "@Url.Action("Calculate")",
+            data: {number1: val1, number2: val2},
+            dataType: "json",
+            success: function (msg) {
+                console.log(msg);
+                console.log(msg.add);
+                console.log(msg.substract);
+                console.log(msg.multiply);
+                console.log(msg.divide);
+            },
+            error: function (req, status, error) {
+                alert(error);
+            }
+        });*@
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Add")",
+            data: {number1: val1, number2: val2},
+            dataType: "text",
+            success: function (msg) {
+                $("#result").text(msg)
+            },
+            error: function (req, status, error) {
+                console.log(msg);
+            }
+        });
+    });
+</script>
